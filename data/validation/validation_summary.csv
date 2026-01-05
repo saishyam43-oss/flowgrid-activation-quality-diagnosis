@@ -1,0 +1,6 @@
+table,row_count,column_count,null_pct
+accounts,2500,5,0.09456
+users,59901,5,0.0
+events,120889,5,0.0
+experiments,2514,5,0.0
+subscriptions,2500,6,0.12446666666666667
