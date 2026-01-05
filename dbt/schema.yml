@@ -1,0 +1,185 @@
+version: 2
+
+models:
+
+  # ------------------------
+  # STAGING
+  # ------------------------
+
+  - name: stg_events
+    description: >
+      Canonical, deduplicated event stream containing only intentional,
+      user-initiated product actions. Forms the foundation for all downstream
+      activation, habit, and lifecycle metrics.
+    columns:
+      - name: account_id
+        tests:
+          - not_null
+
+      - name: user_id
+        tests:
+          - not_null
+
+      - name: event_type
+        tests:
+          - not_null
+          - accepted_values:
+              arguments:
+                values:
+                  - workspace_created
+                  - workflow_created
+                  - workflow_executed
+                  - integration_connected
+                  - collaborator_invited
+                  - collaborator_added
+
+      - name: event_timestamp
+        tests:
+          - not_null
+
+    tests:
+      - dbt_utils.unique_combination_of_columns:
+          arguments:
+            combination_of_columns:
+              - account_id
+              - user_id
+              - event_type
+              - event_timestamp
+
+
+  # ------------------------
+  # INTERMEDIATE
+  # ------------------------
+
+  - name: int_account_event_sequence
+    description: >
+      Strictly ordered, per-account event timeline derived from stg_events.
+      Enforces deterministic sequencing required for Aha, TT2U, and habit logic.
+    columns:
+      - name: account_id
+        tests:
+          - not_null
+
+      - name: event_order
+        tests:
+          - not_null
+
+
+  # ------------------------
+  # FACTS – ACTIVATION
+  # ------------------------
+
+  - name: fct_account_activation_state
+    description: >
+      Account-level activation fact enforcing a strict Aha sequence
+      (workflow_created → collaborator_added → workflow_executed).
+      Provides hardened activation, user-level Aha counts, and TT2U.
+    columns:
+      - name: account_id
+        tests:
+          - not_null
+          - unique
+
+      - name: aha_user_count
+        tests:
+          - not_null
+
+      - name: is_activated
+        tests:
+          - not_null
+
+      - name: tt2u_days
+        description: >
+          Time-to-second-user-Aha in days. Only populated when >=2 users
+          complete the full Aha sequence.
+
+
+  # ------------------------
+  # FACTS – HABIT
+  # ------------------------
+
+  - name: fct_account_habit_state
+    description: >
+      Account-level habit classification. An account is habitual only if
+      post-Aha workflow executions are repeated, sustained over time, and
+      performed by multiple Aha-qualified users.
+    columns:
+      - name: account_id
+        tests:
+          - not_null
+          - unique
+
+  # ------------------------
+  # FACTS – NAIVE VS HARDENED
+  # ------------------------
+
+  - name: fct_naive_vs_hardened_activation
+    description: >
+      Comparison table illustrating the gap between naive activation
+      (any workflow execution) and hardened activation (strict Aha).
+      Used to expose false-positive activation inflation.
+    columns:
+      - name: account_id
+        tests:
+          - not_null
+          - unique
+
+      - name: naive_is_activated
+        tests:
+          - not_null
+
+      - name: hardened_is_activated
+        tests:
+          - not_null
+
+      - name: false_positive_naive_activation
+        tests:
+          - not_null
+
+
+  # ------------------------
+  # FACTS – LIFECYCLE
+  # ------------------------
+
+  - name: fct_account_lifecycle_state
+    description: >
+      Deterministic account lifecycle state machine combining activation,
+      collaboration depth, habit formation, and churn.
+    columns:
+      - name: account_id
+        tests:
+          - not_null
+          - unique
+
+      - name: lifecycle_state
+        tests:
+          - not_null
+          - accepted_values:
+              arguments:
+                values:
+                  - provisioned
+                  - configured
+                  - aha
+                  - multi_user
+                  - habitual
+                  - churned
+
+
+  # ------------------------
+  # FACTS – ACTIVATION QUALITY SCORE
+  # ------------------------
+
+  - name: fct_activation_quality_score
+    description: >
+      Composite 0–100 Activation Quality Score (AQS) synthesizing setup
+      completion, Aha depth, collaboration speed (TT2U), and habit formation.
+      Designed to differentiate fragile activation from durable value.
+    columns:
+      - name: account_id
+        tests:
+          - not_null
+          - unique
+
+      - name: activation_quality_score
+        tests:
+          - not_null

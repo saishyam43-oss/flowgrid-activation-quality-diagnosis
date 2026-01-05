@@ -1,0 +1,10 @@
+version: 2
+
+sources:
+  - name: flowgrid
+    database: portfolio-projects-476112
+    schema: Flowgrid_Activation_Metrics_Redesign
+    tables:
+      - name: events_raw
+      - name: accounts_raw
+      - name: subscriptions_raw
