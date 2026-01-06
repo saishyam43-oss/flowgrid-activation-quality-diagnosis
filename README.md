@@ -167,6 +167,10 @@ All decision-grade metrics depend exclusively on hardened fact tables.
 
 ![dbt Metric Lineage](images/dbt_lineage.png)
 
+**Reference Implementation**
+- View the naive vs. hardened activation logic: [`analysis/01_liars_funnel`](analysis/01_liars_funnel)
+- View the lifecycle and habit modeling layer (dbt): [`dbt/models/facts`](dbt/models/facts)
+
 ---
 
 ## 🧭 Insights → Decisions I Would Make
@@ -208,9 +212,30 @@ These constraints are intentional and do not weaken the directional conclusions.
 
 ---
 
-## 🧠 What This Shows About How I Work
+## 🛠️ Tech Stack & Implementation
 
-This project reflects how I approach senior product analytics:
+I built this analysis end-to-end using a modern analytics stack, chosen to support **metric rigor and reproducibility**, not speed of visualization.
+
+- **SQL (BigQuery)**  
+  Used advanced window functions and event sequencing to construct lifecycle states, sessionized behavior, and collaboration timing logic.
+
+- **Python**  
+  Used to generate behavior-faithful synthetic data, inject controlled data inconsistencies, and run statistical validation to support metric hardening. Python supports the analysis; it does not drive the conclusions.
+
+- **dbt (Data Build Tool)**  
+  Modeled hardened, decision-safe fact tables with explicit DAGs for lifecycle validation, metric lineage, and testable assumptions.
+
+- **Looker Studio**  
+  Designed a constrained, executive-level dashboard using calculated fields and blended sources to enforce narrative order and prevent exploratory misuse.
+
+- **Git**  
+  Used for version control and to simulate a production analytics workflow, separating raw data, transformations, and decision outputs.
+
+---
+
+## 🧠 How I Approach Product Analytics Problems
+
+This project reflects my analytical approach & philosophy:
 
 - I redefine success metrics instead of optimizing dashboards  
 - I invalidate comforting KPIs rather than defend them  
@@ -225,6 +250,6 @@ It’s in **what I chose to measure, what I rejected, and what I decided to do n
 
 ## 📣 Call to Action
 
-If you want to discuss activation metrics, habit formation, or how to design decision-safe product analytics, feel free to reach out or open an issue in the repository.
+I am currently exploring Senior Product Analyst and Product Analytics roles where this level of metric rigor can be applied to real user data.
 
-I built this project to spark better questions, not better charts.
+If your team needs to move beyond vanity metrics and into decision-safe product analytics, let’s talk.
