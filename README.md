@@ -13,35 +13,37 @@
 
 ## ⚡ Executive TL;DR
 
-Flowgrid’s activation metrics appear healthy on the surface, with ~98% of accounts triggering an activation event.  
-However, when activation is measured as **sustained, collaborative usage**, the true habit rate collapses to **0.24%**.
+When I first looked at Flowgrid’s activation metrics, they appeared strong: ~98% of accounts triggered an activation event.  
+But when I reframed activation as **sustained, collaborative usage**, the true habit rate collapsed to **0.24%**.
 
-This analysis shows that Flowgrid reliably delivers first value. 
-It is failing to **reinforce that value through collaboration and breadth of usage**.
+I found that Flowgrid reliably delivers first value.  
+What it fails to do is **reinforce that value through collaboration and breadth of usage**.
 
-The result is a system that reports success while quietly accumulating churn risk.
+As a result, the product reports success while quietly accumulating churn risk.
 
 The gap is not incremental.  
 It is structural.
 
+---
+
 ## 🧭 How to Read This (2 minutes)
 
-- If you have limited time, read the **Executive TL;DR** and review the **Executive Dashboard**.
-- If you want the diagnosis, continue through **Where Activation Breaks** and **What Predicts Real Success**.
+- If you’re short on time, read the **Executive TL;DR** and scan the **Executive Dashboard**.
+- If you want the diagnosis, focus on **Where Activation Breaks** and **What Predicts Real Success**.
 - If you care about decision rigor, read **Metric Lineage & Hardening** and **Insights → Product Decisions**.
 
-This document is written to be skimmed first and read deeply second.
+I wrote this document to be skimmed first and read deeply second.
 
 ---
 
 ## 📊 Executive Dashboard (Decision View)
 
-The dashboard below is intentionally constrained to answer one question:
+I designed this dashboard to answer one question only:
 
 **Are we building real habit, or reporting activity as success?**
 
-It contains no filters or exploratory views.  
-Each visual exists to support a specific product decision.
+It contains no filters or exploratory views by design.  
+Every visual exists to support a specific product decision.
 
 ![Flowgrid Executive Dashboard](dashboard/looker_overview.png)
 
@@ -51,171 +53,178 @@ Each visual exists to support a specific product decision.
 
 Flowgrid is a fictional B2B SaaS platform that enables teams to design, execute, and monitor operational workflows collaboratively.
 
-The product’s core job-to-be-done is not solo task completion, but **shared execution and repeatable value across teams**.  
-As a result, collaboration and adoption spread are fundamental to long-term retention.
+From the outset, I treated Flowgrid as a **collaboration-first product**, not a solo productivity tool.  
+Its core job-to-be-done is shared execution and repeatable value across teams.
 
-This project evaluates whether Flowgrid’s current activation metrics accurately reflect that reality.
+That assumption shaped every metric choice in this project.
 
 ---
 
-## 🧠 Project Framing: Why Activation Metrics Are Broken
+## 🧠 Project Framing: Why I Challenged Activation Metrics
 
 This is not a churn post-mortem.
 
-The goal is to **detect failure before churn appears**, by challenging whether commonly reported activation metrics are decision-safe.
+I approached this as a **pre-churn diagnosis**, with one goal:  
+to determine whether Flowgrid’s activation metrics were decision-safe.
 
-Rather than asking *“How many users activated?”*, the analysis asks:
+Instead of asking *“How many users activated?”*, I deliberately asked harder questions:
 
-- Does activation predict habit?
+- Does activation actually predict habit?
 - Where does activation collapse?
-- Which behaviors actually separate retained accounts from churned ones?
+- Which behaviors separate retained accounts from churned ones?
 
-The output is a **metric and decision redesign**, not a reporting exercise.
+What follows is a **metric and decision redesign**, not a reporting exercise.
 
 ---
 
-## ⭐ Metric Philosophy: From Activation to Habit
+## ⭐ Metric Philosophy: How I Defined Success
 
-Binary activation metrics optimize for **motion**, not **outcomes**.
+Binary activation metrics optimize for **motion**, not **outcomes**.  
+I rejected them early.
 
-In this analysis:
+In this analysis, I explicitly separated:
 
-- **Setup** represents technical readiness  
-- **Aha** represents validated first value  
-- **Habit** represents repeat, collaborative value over time  
+- **Setup** – technical readiness  
+- **Aha** – validated first value  
+- **Habit** – repeat, collaborative value over time  
 
-Activation is treated as **necessary but insufficient**.  
-Only habit is considered a true success state.
+I treated activation as **necessary but insufficient**.  
+Only habit qualifies as success.
 
-To bridge this gap, an **Activation Quality Score (AQS)** is used as a leading indicator, combining depth of value, collaboration speed, and habit signals into a decision-safe measure.
+To bridge this gap, I designed an **Activation Quality Score (AQS)** as a leading indicator.  
+It combines depth of value, collaboration speed, and habit signals into something that can actually guide decisions.
 
 ---
 
 ## 🚨 Why Naive Activation Metrics Failed
 
-Flowgrid’s naive activation rate is approximately **98%**, defined as any workflow-related event.
+Using Flowgrid’s naive definition, ~98% of accounts “activated.”
 
-When activation is redefined as sustained, multi-user behavior, the true habit rate drops to **0.24%**.
+When I redefined activation as sustained, multi-user behavior, the true habit rate dropped to **0.24%**.
 
-This exposes a classic **liar’s funnel**.
+That gap exposed a classic **liar’s funnel**.
 
-Binary activation metrics collapse a complex behavioral journey into a single checkbox and dramatically overstate success.  
+Binary activation collapses a complex behavioral journey into a checkbox and dramatically overstates success.  
 Completion is easy. Habit is rare.
 
 ---
 
-## 🔍 Where Activation Breaks
+## 🔍 Where Activation Actually Breaks
 
-Lifecycle analysis shows that Flowgrid reliably delivers first value:
+Lifecycle analysis showed me something important:
 
-- All Aha events occur within Day 0–1  
+- All Aha moments occur within Day 0–1  
 - Provisioning and configuration are not bottlenecks  
 
-The failure occurs **after** first value.
+Flowgrid does not struggle to deliver first value.
 
-There is a **96.8% drop-off** between the Aha moment and multi-user usage.
+The failure happens **after** that.
+
+I observed a **96.8% drop-off** between Aha and multi-user usage.
 
 **Aha is necessary, but not sufficient.**  
 Without fast reinforcement through collaboration, first value **decays instead of compounding**.
 
 ---
 
-## 📈 What Predicts Real Success
+## 📈 What I Found Actually Predicts Success
 
-Several signals clearly differentiate habitual accounts from churned ones.
+Several signals clearly differentiated habitual accounts from churned ones.
 
 ### Collaboration Timing
-- Accounts that invite a second user within one day have a meaningful chance of becoming habitual  
-- If Time-to-Second-User exceeds one day, the habit rate is **0%**
+I found that accounts inviting a second user within one day had a meaningful chance of becoming habitual.  
+Once Time-to-Second-User exceeded one day, the habit rate fell to **0%**.
 
 Delay is fatal.
 
 ### Activation Quality
-- Low and mid-quality activation behave identically, both fail  
-- Only high AQS correlates with habit, at ~60%
+Low and mid-quality activation behaved identically, both failed.  
+Only high AQS correlated with habit, at ~60%.
 
 Moderate activation is not a stepping stone.  
 It is a dead end.
 
 ### Behavioral Breadth
-- Habitual accounts explore roughly **2× more feature types** early  
-- Raw activity volume does not differentiate outcomes  
+Habitual accounts explored roughly **2× more feature types** early on.  
+Raw activity volume did not differentiate outcomes.
 
-This difference is statistically validated and reflects *how* users engage, not how much they click.
+I validated this statistically. The difference reflects *how* users engage, not how much they click.
 
 ---
 
-## 🧱 Metric Lineage & Hardening
+## 🧱 How I Hardened the Metrics
 
-Activation metrics are not computed directly from raw events.
+I did not compute activation metrics directly from raw events.
 
-All decision-grade metrics are derived through a layered modeling approach that enforces:
+Instead, I built a layered modeling approach that enforces:
 
 - Event deduplication  
 - Strict sequencing  
 - Lifecycle validity  
 
-Naive activation is intentionally isolated to demonstrate inflation and is never reused downstream.
+I intentionally isolated naive activation metrics to demonstrate inflation.  
+All decision-grade metrics depend exclusively on hardened fact tables.
 
 ![dbt Metric Lineage](images/dbt_lineage.png)
 
 ---
 
-## 🧭 Insights → Product Decisions
+## 🧭 Insights → Decisions I Would Make
 
-This analysis leads to three explicit product decisions.
+This analysis led me to three explicit product decisions.
 
 ### FORCE COLLABORATION
-Solo accounts have **0% retention**.  
-Gate new workflows until a second user is invited.
+I found that solo accounts have **0% retention**.  
+I would gate new workflows until a second user is invited.
 
 **Metric Owner:** Time to Second User ≤ 1 day
 
 ---
 
 ### GUIDE EXPLORATION
-Repetition does not build habit.  
-Replace linear checklists with guided, multi-feature discovery.
+I found that repetition does not build habit.  
+I would replace linear checklists with guided, multi-feature discovery.
 
 **Metric Owner:** % High Activation Quality Accounts
 
 ---
 
 ### MEASURE REALITY
-Stop reporting “Setup Complete.”  
+I would stop reporting “Setup Complete.”  
 It hides **99% of churn risk** and creates false confidence.
 
 **Metric Owner:** True Habit Rate
 
 ---
 
-## ⚠️ Limitations & What This Does Not Cover
+## ⚠️ Limitations & What I Did Not Solve
 
-- Data is synthetic, though behavior-faithful and intentionally noisy  
-- No pricing or revenue linkage is modeled  
+- The data is synthetic, though behavior-faithful and intentionally noisy  
+- I did not model pricing or revenue outcomes  
 - Habit is defined behaviorally, not financially  
-- No predictive or ML models are used by design  
+- I deliberately avoided predictive or ML models  
 
-These constraints are intentional and do not invalidate the directional conclusions.
+These constraints are intentional and do not weaken the directional conclusions.
 
 ---
 
-## 🧠 How This Demonstrates Senior Product Analytics
+## 🧠 What This Shows About How I Work
 
-This project demonstrates senior-level analytical judgment by:
+This project reflects how I approach senior product analytics:
 
-- Redefining success metrics instead of optimizing dashboards  
-- Invalidating comforting KPIs rather than defending them  
-- Treating activation as a system, not a step  
-- Translating evidence directly into product decisions  
-- Knowing when *not* to use ML or over-segmentation  
+- I redefine success metrics instead of optimizing dashboards  
+- I invalidate comforting KPIs rather than defend them  
+- I treat activation as a system, not a step  
+- I translate evidence directly into product decisions  
+- I know when *not* to use ML or over-segmentation  
 
-The value lies in **what is measured, what is rejected, and what decisions follow**.
+The value is not in the charts.  
+It’s in **what I chose to measure, what I rejected, and what I decided to do next**.
 
 ---
 
 ## 📣 Call to Action
 
-If you’re interested in discussing activation metrics, habit formation, or product analytics at a senior level, feel free to reach out or open an issue in the repository.
+If you want to discuss activation metrics, habit formation, or how to design decision-safe product analytics, feel free to reach out or open an issue in the repository.
 
-This project is intended to spark better questions, not better charts.
+I built this project to spark better questions, not better charts.
