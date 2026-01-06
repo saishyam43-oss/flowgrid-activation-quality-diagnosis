@@ -16,13 +16,21 @@
 Flowgrid’s activation metrics appear healthy on the surface, with ~98% of accounts triggering an activation event.  
 However, when activation is measured as **sustained, collaborative usage**, the true habit rate collapses to **0.24%**.
 
-This analysis shows that Flowgrid is not failing to deliver first value.  
+This analysis shows that Flowgrid reliably delivers first value. 
 It is failing to **reinforce that value through collaboration and breadth of usage**.
 
-The result is a system that reports success while silently accumulating churn risk.
+The result is a system that reports success while quietly accumulating churn risk.
 
 The gap is not incremental.  
 It is structural.
+
+## 🧭 How to Read This (2 minutes)
+
+- If you have limited time, read the **Executive TL;DR** and review the **Executive Dashboard**.
+- If you want the diagnosis, continue through **Where Activation Breaks** and **What Predicts Real Success**.
+- If you care about decision rigor, read **Metric Lineage & Hardening** and **Insights → Product Decisions**.
+
+This document is written to be skimmed first and read deeply second.
 
 ---
 
@@ -62,7 +70,7 @@ Rather than asking *“How many users activated?”*, the analysis asks:
 - Where does activation collapse?
 - Which behaviors actually separate retained accounts from churned ones?
 
-The output is a metric and decision redesign, not a reporting exercise.
+The output is a **metric and decision redesign**, not a reporting exercise.
 
 ---
 
@@ -108,7 +116,7 @@ The failure occurs **after** first value.
 There is a **96.8% drop-off** between the Aha moment and multi-user usage.
 
 **Aha is necessary, but not sufficient.**  
-Without fast reinforcement through collaboration, first value decays instead of compounding.
+Without fast reinforcement through collaboration, first value **decays instead of compounding**.
 
 ---
 
@@ -210,4 +218,4 @@ The value lies in **what is measured, what is rejected, and what decisions follo
 
 If you’re interested in discussing activation metrics, habit formation, or product analytics at a senior level, feel free to reach out or open an issue in the repository.
 
-This project is intended to spark better questions, not just better charts.
+This project is intended to spark better questions, not better charts.
