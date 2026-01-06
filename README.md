@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="images/flowgrid_logo.png" width="220"/>
+  <img src="images/flowgrid_logo.png" width="500"/>
 </p>
 
 <h1 align="center">Flowgrid Activation: Are We Building Real Habit or Fooling Ourselves?</h1>
