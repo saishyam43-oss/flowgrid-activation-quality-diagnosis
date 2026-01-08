@@ -11,7 +11,7 @@
 
 ---
 
-## ⚡ Executive TL;DR
+## ⚡ Executive Snapshot
 
 When I first looked at Flowgrid’s activation metrics, they appeared strong: ~98% of accounts triggered an activation event.  
 But when I reframed activation as **sustained, collaborative usage**, the true habit rate collapsed to **0.24%**.
