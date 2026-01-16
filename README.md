@@ -9,6 +9,8 @@
   Product Analytics • Activation Metrics • B2B SaaS
 </p>
 
+![Status: Strategic Review](https://img.shields.io/badge/Status-Strategic_Review-blue) ![Metric: Activation](https://img.shields.io/badge/Metric-Activation_Quality-orange) ![Outcome: Metric_Hardened](https://img.shields.io/badge/Outcome-Metric_Hardened-green)
+
 ---
 
 ## ⚡ Executive Snapshot
