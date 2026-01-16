@@ -13,6 +13,22 @@
 
 ---
 
+## 🧭 Decision Summary
+
+**Decision:** Redefine activation around collaborative habit, not binary setup completion.
+
+**Why:** 98% of accounts “activated,” but only 0.24% formed sustained, collaborative usage.
+
+**Core Finding:** Activation succeeds at first value but collapses immediately without rapid collaboration.
+
+**Product Risk:** Current metrics report success while silently accumulating churn risk.
+
+**Primary Action:** Gate workflows and onboarding around Time-to-Second-User ≤ 1 day.
+
+**Owner:** Product Analytics
+
+---
+
 ## ⚡ Executive Snapshot
 
 When I first looked at Flowgrid’s activation metrics, they appeared strong: ~98% of accounts triggered an activation event.  
@@ -53,12 +69,11 @@ Every visual exists to support a specific product decision.
 
 ## 🏢 Product & Business Context
 
-Flowgrid is a fictional B2B SaaS platform that enables teams to design, execute, and monitor operational workflows collaboratively.
+Flowgrid is a collaboration-first B2B SaaS product.
 
-From the outset, I treated Flowgrid as a **collaboration-first product**, not a solo productivity tool.  
-Its core job-to-be-done is shared execution and repeatable value across teams.
+This analysis evaluates whether Flowgrid’s activation metrics measure **real habit formation** or merely **early activity**. By redefining activation around sustained, multi-user behavior, I found that reported activation success overstated true product adoption by over 400×.
 
-That assumption shaped every metric choice in this project.
+The goal of this project is not reporting accuracy, but decision safety.
 
 ---
 
@@ -79,6 +94,9 @@ What follows is a **metric and decision redesign**, not a reporting exercise.
 
 ---
 
+<details>
+<summary><strong>🧠 Metric Philosophy & Why Naive Activation Failed (Details)</strong></summary>
+  
 ## ⭐ Metric Philosophy: How I Defined Success
 
 Binary activation metrics optimize for **motion**, not **outcomes**.  
@@ -108,6 +126,8 @@ That gap exposed a classic **liar’s funnel**.
 
 Binary activation collapses a complex behavioral journey into a checkbox and dramatically overstates success.  
 Completion is easy. Habit is rare.
+
+</details>
 
 ---
 
@@ -175,31 +195,57 @@ All decision-grade metrics depend exclusively on hardened fact tables.
 
 ---
 
-## 🧭 Insights → Decisions I Would Make
+## 🧭 Decisions This Analysis Forces
 
-This analysis led me to three explicit product decisions.
+This analysis leads to three unavoidable product decisions if Flowgrid wants activation to predict retention.
 
-### FORCE COLLABORATION
-I found that solo accounts have **0% retention**.  
-I would gate new workflows until a second user is invited.
+### 1️⃣ Force Early Collaboration
 
-**Metric Owner:** Time to Second User ≤ 1 day
+Solo usage does not produce habit.  
+Accounts that fail to invite a second user within one day have a **0% habit formation rate**.
 
----
+**Decision:**  
+I would gate new workflows and advanced actions until a second user is invited.
 
-### GUIDE EXPLORATION
-I found that repetition does not build habit.  
-I would replace linear checklists with guided, multi-feature discovery.
-
-**Metric Owner:** % High Activation Quality Accounts
+**Metric Owner:** 
+Time to Second User ≤ 1 day
 
 ---
 
-### MEASURE REALITY
-I would stop reporting “Setup Complete.”  
+### 2️⃣ Replace Checklists with Guided Exploration
+
+Repeated usage of a single feature does not build habit.  
+Habitual accounts demonstrate **early behavioral breadth**, not higher activity volume.
+
+**Decision:**  
+I would replace linear setup checklists with guided, multi-feature onboarding paths that reinforce value across the product surface.
+
+**Metric Owner:**
+% of accounts reaching High Activation Quality Score (AQS)
+
+---
+
+### 3️⃣ Stop Treating Activation as a Binary Event
+
+Binary activation reports success while masking the majority of churn risk.  
+It optimizes for completion, not retention.
+
+**Decision:**  
+I would stop reporting “Setup Complete” as a success metric and elevate habit-based activation to the executive level. 
 It hides **99% of churn risk** and creates false confidence.
 
-**Metric Owner:** True Habit Rate
+**Metric Owner:**
+True Habit Rate
+
+---
+
+## 🚫 Metrics I Would Stop Reporting
+
+- Binary “Activation Completed”  
+- Setup checklist completion rates  
+- Single-user activation events  
+
+These metrics create false confidence and mask the 99% of churn risk that occurs after first value.
 
 ---
 
