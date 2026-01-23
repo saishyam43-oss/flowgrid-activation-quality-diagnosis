@@ -46,7 +46,7 @@ It is structural.
 
 ## 🧭 How to Read This (2 minutes)
 
-- If you’re short on time, read the **Executive TL;DR** and scan the **Executive Dashboard**.
+- If you’re short on time, read the **Executive Snapshot** and scan the **Executive Dashboard**.
 - If you want the diagnosis, focus on **Where Activation Breaks** and **What Predicts Real Success**.
 - If you care about decision rigor, read **Metric Lineage & Hardening** and **Insights → Product Decisions**.
 
